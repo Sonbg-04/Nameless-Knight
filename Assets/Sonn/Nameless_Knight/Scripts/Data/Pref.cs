@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Pref : MonoBehaviour
+namespace Sonn.Nameless_Knight
 {
-    // Start is called before the first frame update
-    void Start()
+    public static class Pref
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public static bool GetBool(string key, bool defaultValue = false)
+        {
+            return PlayerPrefs.HasKey(key)
+                 ? PlayerPrefs.GetInt(key) == 1 ? true : false
+                 : defaultValue;
+        }
+        public static void SetBool(string key, bool value)
+        {
+            PlayerPrefs.SetInt(key, value ? 1 : 0);
+        }
     }
 }

@@ -9,7 +9,9 @@ TagManager:
   - Knight
   - Dead
   - Final_destination
-  - Audio
+  - Victory
+  - Heart
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
