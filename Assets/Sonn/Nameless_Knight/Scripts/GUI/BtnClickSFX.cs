@@ -22,6 +22,10 @@ namespace Sonn.Nameless_Knight
         }
         private void Start()
         {
+            if (IsComponentNull())
+            {
+                return;
+            }
             m_btn.onClick.AddListener(() => ClickSFXEvent());
         }
         private void ClickSFXEvent()

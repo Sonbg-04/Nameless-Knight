@@ -16,6 +16,7 @@ namespace Sonn.Nameless_Knight
                 {
                     enemy.TakeDamage(damage);
                 }
+                
             }
         }
     }

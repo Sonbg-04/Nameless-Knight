@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Sonn.Nameless_Knight
@@ -11,9 +12,10 @@ namespace Sonn.Nameless_Knight
         {
             m_anim = GetComponent<Animator>();
         }
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Knight"))
+            if (collision.gameObject.CompareTag("Knight") && 
+                Player.Ins.enemyLists.Count == 0)
             {
                 m_anim.SetBool("Powering", true);
             }

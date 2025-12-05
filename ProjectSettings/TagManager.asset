@@ -12,6 +12,9 @@ TagManager:
   - Victory
   - Heart
   - Arrow
+  - Door
+  - Fade
+  - Virtual_camera
   layers:
   - Default
   - TransparentFX

@@ -11,5 +11,7 @@ namespace Sonn.Nameless_Knight
         public const string HEART_TAG = "Heart";
         public const string ARROW_TAG = "Arrow";
         public const string GROUND_LAYER = "Ground";
+        public const string DOOR_TAG = "Door";
+        public const string VIRTUAL_CAMERA_TAG = "Virtual_camera";
     }
 }

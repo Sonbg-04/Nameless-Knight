@@ -11,6 +11,10 @@ namespace Sonn.Nameless_Knight
 
         public GameState gameState;
 
+        private int m_score;
+
+        public int Score { get => m_score; set => m_score = value; }
+
         private void Awake()
         {
             MakeSingleton();
@@ -18,10 +22,11 @@ namespace Sonn.Nameless_Knight
         private void Start()
         {
             AudioState();
+            StartGame();
         }
         public bool IsComponentNull()
         {
-            bool check = AudioManager.Ins == null;
+            bool check = AudioManager.Ins == null || FadeTransition.Ins == null;
             if (check)
             {
                 Debug.LogError("Có component bị null ở " + this.name + "!");
@@ -35,18 +40,28 @@ namespace Sonn.Nameless_Knight
                 return;
             }
             var isMusicOn = Pref.GetBool(GamePref.isMusicOn.ToString(), true);
-            var isSFXOn = Pref.GetBool(GamePref.isSFXOn.ToString(), true);
             AudioManager.Ins.musicSource.mute = !isMusicOn;
+            
+            var isSFXOn = Pref.GetBool(GamePref.isSFXOn.ToString(), true);
             AudioManager.Ins.sfxSource.mute = !isSFXOn;
-            AudioManager.Ins.Play(AudioManager.Ins.musicSource, AudioManager.Ins.musicClips[1]);
         }    
+        public void StartGame()
+        {
+            if (IsComponentNull())
+            {
+                return;
+            }
+            gameState = GameState.Start;
+            AudioManager.Ins.Play(AudioManager.Ins.musicSource, AudioManager.Ins.musicClips[1]);
+        }
         public void PlayGame()
         {
             if (IsComponentNull())
             {
                 return;
             }
-            SceneManager.LoadSceneAsync(1);
+            FadeTransition.Ins.FadeToScene(1);
+            Time.timeScale = 1f;
             gameState = GameState.Playing;
             AudioManager.Ins.Play(AudioManager.Ins.musicSource, AudioManager.Ins.musicClips[0]);
         }

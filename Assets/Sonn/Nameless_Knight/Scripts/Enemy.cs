@@ -1,81 +1,61 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Sonn.Nameless_Knight
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, IComponentChecking
     {
-        public float start, end, speedMovement,
-                     speedChase, chaseRange, stopChaseRange,
-                     groundCheckDistance;
+        public float start, end, speedMovement, groundCheckDistance;
         public int health;
-        public Transform player;
         public LayerMask groundLayer;
-        public Vector2 groundCheckOffset;
+        public Transform groundCheckPoint;
 
         private Animator m_anim;
         private SpriteRenderer m_sR;
         private int m_currentHealth;
-        private bool m_isMovingRight = true, m_isChasing = false, m_isReturning = false;
-        private Vector3 m_originalPos;
+        private bool m_isMovingRight = true;
 
         private void Awake()
         {
             m_sR = GetComponent<SpriteRenderer>();
             m_anim = GetComponent<Animator>();
             m_currentHealth = health;
-            m_originalPos = transform.position;
         }
         private void Update()
         {
-            ChasePlayer();
+            if (IsComponentNull())
+            {
+                return;
+            }    
+            EnemyMovement();
         }
-        private void ChasePlayer()
+        public bool IsComponentNull()
         {
-            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-            if (distanceToPlayer <= chaseRange)
+            bool check = GameManager.Ins == null || Player.Ins == null ||
+                         m_anim == null || m_sR == null;
+            if (check)
             {
-                m_isChasing = true;
-                m_isReturning = false;
+                Debug.LogError("Có component bị null ở " + this.name + "!");
             }
-            else if (distanceToPlayer >= stopChaseRange)
-            {
-                m_isChasing = false;
-                m_isReturning = true;
-            }
-            if (m_isChasing)
-            {
-                var Dir = player.position.x > transform.position.x ? 1 : -1;
-                if (IsGrounded(Dir))
-                {
-                    EnemyChasing(Dir);
-                }
-                else
-                {
-                    m_isChasing = false;
-                    m_isReturning = true;
-                }    
-            }
-            else if (m_isReturning)
-            {
-                ReturnToOriginalPosition();
-            }
-            else
-            {
-                EnemyMovement();
-            } 
-                
-        }    
+            return check;
+        }
         private void EnemyMovement()
         {
             var dir = m_isMovingRight ? 1 : -1;
-            if (!IsGrounded(dir))
+            var newPosX = transform.position.x + speedMovement * dir * Time.deltaTime;
+            Vector3 checkPos = new (newPosX, transform.position.y, transform.position.z);
+            var hasGround = Physics2D.Raycast(
+                groundCheckPoint.position + new Vector3(dir * 0.3f, 0, 0),
+                Vector2.down,
+                groundCheckDistance,
+                groundLayer);
+
+            if (!hasGround)
             {
                 m_isMovingRight = !m_isMovingRight;
-                dir = m_isMovingRight ? 1 : -1;
+                return;
             }
-            var newPosX = transform.position.x + (speedMovement * dir) * Time.deltaTime;
             if (newPosX >= end)
             {
                 newPosX = end;
@@ -88,43 +68,12 @@ namespace Sonn.Nameless_Knight
             }
             m_sR.flipX = !m_isMovingRight;
             transform.position = new Vector3(newPosX, transform.position.y, transform.position.z);
-        }    
-        private void EnemyChasing(int direction)
-        {
-            transform.position += new Vector3(direction * speedChase * Time.deltaTime, 0, 0);
-            m_sR.flipX = direction < 0;
-        }    
-        private void ReturnToOriginalPosition()
-        {
-            if (Vector2.Distance(transform.position, m_originalPos) > 0.1f)
-            {
-                var direction = m_originalPos.x > transform.position.x ? 1 : -1;
-                if (IsGrounded(direction))
-                {
-                    transform.position += new Vector3(direction * speedMovement * Time.deltaTime, 0, 0);
-                    m_sR.flipX = direction < 0;
-                }
-                else
-                {
-                    m_isReturning = false;
-                }    
-            }
-            else
-            {
-                m_isReturning = false;
-            }
         }
-        private bool IsGrounded(int dir)
-        {
-            Vector2 origin = (Vector2)transform.position + new Vector2(groundCheckOffset.x * dir, groundCheckOffset.y);
-            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundCheckDistance, groundLayer);
-            return hit.collider != null;
-        }    
         public void TakeDamage(int damage)
         {
             m_currentHealth -= damage;
             StartCoroutine(HitEffect());
-            if (m_currentHealth < 0)
+            if (m_currentHealth <= 0)
             {
                 Die();
             }    
@@ -137,7 +86,10 @@ namespace Sonn.Nameless_Knight
         }    
         private void Die()
         {
-            Destroy(gameObject);
+            Player.Ins.EnemyDied(gameObject);
+            m_anim.SetBool("Dead", true);
+            Destroy(gameObject, 0.5f);
+            GameManager.Ins.Score++;
         }    
     }
 }
