@@ -10,6 +10,7 @@ namespace Sonn.Nameless_Knight
         public static GameManager Ins;
 
         public GameState gameState;
+        public bool isPlayerDead;
 
         private int m_score;
 

@@ -11,6 +11,7 @@ namespace Sonn.Nameless_Knight
         public LayerMask groundLayer;
         public Transform groundCheckPoint;
 
+        private GeneratingTower m_generatingTower;
         private Animator m_anim;
         private SpriteRenderer m_sR;
         private int m_currentHealth;
@@ -21,6 +22,7 @@ namespace Sonn.Nameless_Knight
             m_sR = GetComponent<SpriteRenderer>();
             m_anim = GetComponent<Animator>();
             m_currentHealth = health;
+            m_generatingTower = FindObjectOfType<GeneratingTower>();
         }
         private void Update()
         {
@@ -33,7 +35,7 @@ namespace Sonn.Nameless_Knight
         public bool IsComponentNull()
         {
             bool check = GameManager.Ins == null || Player.Ins == null ||
-                         m_anim == null || m_sR == null;
+                         m_anim == null || m_sR == null || m_generatingTower == null;
             if (check)
             {
                 Debug.LogError("Có component bị null ở " + this.name + "!");
@@ -86,7 +88,11 @@ namespace Sonn.Nameless_Knight
         }    
         private void Die()
         {
-            Player.Ins.EnemyDied(gameObject);
+            if (IsComponentNull())
+            {
+                return;
+            }    
+            m_generatingTower.EnemyDied(gameObject);
             m_anim.SetBool("Dead", true);
             Destroy(gameObject, 0.5f);
             GameManager.Ins.Score++;

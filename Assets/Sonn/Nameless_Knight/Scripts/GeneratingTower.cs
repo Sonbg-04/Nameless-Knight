@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,17 +7,41 @@ namespace Sonn.Nameless_Knight
 {
     public class GeneratingTower : MonoBehaviour
     {
+        public List<GameObject> doorInZones;
+        public List<GameObject> enemyInZones;
+
         private Animator m_anim;
         private void Awake()
         {
             m_anim = GetComponent<Animator>();
         }
+        public void EnemyDied(GameObject enemy)
+        {
+            if (enemy == null)
+            {
+                return;
+            }
+            if (enemyInZones.Contains(enemy))
+            {
+                enemyInZones.Remove(enemy);
+            }
+        }    
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Knight") && 
-                Player.Ins.enemyLists.Count == 0)
+            if (collision.gameObject.CompareTag(Const.PLAYER_TAG))
             {
-                m_anim.SetBool("Powering", true);
+                if (enemyInZones.Count == 0)
+                {
+                    m_anim.SetBool("Powering", true);
+                    foreach (var item in doorInZones)
+                    {
+                        Destroy(item);
+                    }    
+                }
+                else
+                {
+                    Debug.Log("Vẫn còn quái trong khu này!");
+                }    
             }
         }
     }

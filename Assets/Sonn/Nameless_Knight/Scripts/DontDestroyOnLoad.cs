@@ -36,6 +36,7 @@ namespace Sonn.Nameless_Knight
             {
                 existingObjects.Clear();
                 Destroy(gameObject);
+                return;
             }
         }
     }

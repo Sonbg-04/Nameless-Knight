@@ -19,10 +19,8 @@ namespace Sonn.Nameless_Knight
         public Vector3 offsetArrowSpawn;
         public List<Sprite> bloodStates;
         public Image bloodBar;
-        public List<GameObject> enemyLists;
 
         private GameObject m_treasureChest, m_spawnPlayer;
-        private List<GameObject> m_doorLists = new();
         private int m_currentHealth;
         private Vector3 m_originalPos;
         private Animator m_anim;
@@ -81,14 +79,12 @@ namespace Sonn.Nameless_Knight
             if (sceneIndex == 1)
             {
                 transform.position = m_originalPos;
-                m_currentHealth = playerHealth;
             }
-            else if (sceneIndex >= 2)
+            else if (sceneIndex >= 2 && m_spawnPlayer != null)
             {
                 transform.position = m_spawnPlayer.transform.position;
-                m_currentHealth = playerHealth;
             }
-            SetStateOnLoadScene();
+            GameManager.Ins.Score = 0;
         }    
         public void SetStateOnLoadScene()
         {
@@ -97,7 +93,10 @@ namespace Sonn.Nameless_Knight
                 return;
             }
             m_sp.flipX = false;
+            m_currentHealth = playerHealth;
+            BloodPlayer();
             GameManager.Ins.Score = 0;
+            GameManager.Ins.isPlayerDead = false;
         }    
         private void OnSceneLoaded(Scene scene, LoadSceneMode lcm)
         {
@@ -105,17 +104,16 @@ namespace Sonn.Nameless_Knight
             {
                 return;
             }    
-            var sceneIndex = SceneManager.GetActiveScene().buildIndex;
-            if (sceneIndex == 0)
+            if (scene.buildIndex == 0)
             {
-                if (Ins != null)
+                if (Ins == this)
                 {
                     Destroy(gameObject);
                     Ins = null;
                 }
                 return;
             }
-            else if (sceneIndex >= 1)
+            else if (scene.buildIndex >= 1)
             {
                 var blood = GameObject.Find("Blood_bar");
                 if (blood == null)
@@ -133,12 +131,12 @@ namespace Sonn.Nameless_Knight
                     bloodBar.sprite = bloodStates[m_currentHealth];
                 }
 
-                if (sceneIndex >= 2)
+                if (scene.buildIndex >= 2)
                 {
                     var spawnPoint = GameObject.Find("SpawnPlayer");
                     if (spawnPoint == null)
                     {
-                        Debug.LogWarning("Không tìm thấy 'SpawnPlayer' ở scene " + sceneIndex);
+                        Debug.LogWarning("Không tìm thấy 'SpawnPlayer' ở scene " + scene.buildIndex);
                         return;
                     }
                     m_spawnPlayer = spawnPoint;
@@ -153,7 +151,7 @@ namespace Sonn.Nameless_Knight
         {
             bool check = AudioManager.Ins == null || m_anim == null 
                        || m_sp == null || m_rb == null
-                       || GameManager.Ins == null;
+                       || GameManager.Ins == null || GUIManager.Ins == null;
             if (check)
             {
                 Debug.LogError("Có component bị null ở " + this.name + "!");
@@ -170,19 +168,6 @@ namespace Sonn.Nameless_Knight
         }
         private void SearchForGameObject()
         {
-            enemyLists.Clear();
-            var enemies = GameObject.FindGameObjectsWithTag(Const.ENEMY_TAG);
-            if (enemies == null)
-            {
-                Debug.LogWarning("Không tìm thấy kẻ thù!");
-                return;
-            }    
-            foreach (var e in enemies)
-            {
-                enemyLists.Add(e);
-            }
-            Debug.Log("Đã tìm thấy " + enemyLists.Count + " kẻ thù trong màn này.");
-            
             var treasureChest = GameObject.Find("Treasure_chest");
             if (treasureChest == null)
             {
@@ -191,19 +176,6 @@ namespace Sonn.Nameless_Knight
             }
             m_treasureChest = treasureChest;
             Debug.Log("Đã tìm thấy Treasure_chest!");
-
-            m_doorLists.Clear();
-            var doors = GameObject.FindGameObjectsWithTag(Const.DOOR_TAG);
-            if (doors == null)
-            {
-                Debug.LogWarning("Không tìm thấy cánh cửa nào ở màn này!");
-                return;
-            }
-            foreach (var door in doors)
-            {
-                m_doorLists.Add(door);
-            }
-            Debug.Log("Đã tìm thấy " + m_doorLists.Count + " cửa ở màn này!");
         }    
         private void BloodPlayer()
         {
@@ -318,30 +290,8 @@ namespace Sonn.Nameless_Knight
                 if (m_currentHealth <= 0)
                 {
                     GameManager.Ins.GameOver();
-                    var sceneIndex = SceneManager.GetActiveScene().buildIndex;
-                    if (sceneIndex == 1)
-                    {
-                        FindObjectOfType<GUIManager_1>()?.ActiveLosegameGUI();
-                    }
-                    else if (sceneIndex == 2)
-                    {
-                        FindObjectOfType<GUIManager_2>()?.ActiveLosegameGUI();
-                    }    
-                }    
-            }
-
-            if (collision.gameObject.CompareTag(Const.GENERATING_TOWER_TAG))
-            {
-                if (enemyLists.Count == 0)
-                {
-                    foreach (var door in m_doorLists)
-                    {
-                        Destroy(door);
-                    }    
-                }
-                else
-                {
-                    Debug.Log("Hãy tiêu diệt tất cả quái rồi mở cửa!");
+                    GameManager.Ins.isPlayerDead = true;
+                    GUIManager.Ins.ActiveLosegameGUI();   
                 }    
             }
 
@@ -350,16 +300,7 @@ namespace Sonn.Nameless_Knight
                 var sp = m_treasureChest.GetComponent<SpriteRenderer>();
                 sp.sprite = treasureChestOpen;
                 GameManager.Ins.GameWin();
-
-                var sceneIndex = SceneManager.GetActiveScene().buildIndex;
-                if (sceneIndex == 1)
-                {
-                    FindObjectOfType<GUIManager_1>()?.ActiveWingameGUI();
-                }
-                else if (sceneIndex == 2)
-                {
-                    FindObjectOfType<GUIManager_2>()?.ActiveWingameGUI();
-                }
+                GUIManager.Ins.ActiveWingameGUI();
             }    
 
             if (collision.gameObject.CompareTag(Const.HEART_TAG))
@@ -373,16 +314,19 @@ namespace Sonn.Nameless_Knight
                 }    
             }
         }
-        public void EnemyDied(GameObject enemy)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!enemy)
+            if (IsComponentNull())
             {
                 return;
-            }
-            if (enemyLists.Contains(enemy))
+            }    
+            if (collision.gameObject.CompareTag(Const.DEAD_TAG))
             {
-                enemyLists.Remove(enemy);
-            }
+                m_currentHealth = 0;
+                GameManager.Ins.GameOver();
+                GameManager.Ins.isPlayerDead = true;
+                GUIManager.Ins.ActiveLosegameGUI();
+            }    
         }
     }
 }
