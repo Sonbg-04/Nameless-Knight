@@ -157,7 +157,7 @@ namespace Sonn.Nameless_Knight
             }
             LoadSceneSafe(SceneManager.GetActiveScene().buildIndex + 1);
             GameManager.Ins.PlayGame();
-            Player.Ins.SetStateOnLoadScene();
+            Player.Ins.SetOriginalPos();
             NonActiveObject();
         }
         public void ReplayGameEvent()

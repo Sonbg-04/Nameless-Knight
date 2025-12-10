@@ -15,6 +15,13 @@ namespace Sonn.Nameless_Knight
         {
             m_anim = GetComponent<Animator>();
         }
+        private void Start()
+        {
+            foreach (var enemy in enemyInZones)
+            {
+                enemy.GetComponent<Enemy>().SetTower(this);
+            }
+        }
         public void EnemyDied(GameObject enemy)
         {
             if (enemy == null)

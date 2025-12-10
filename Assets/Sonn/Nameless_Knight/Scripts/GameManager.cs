@@ -19,6 +19,7 @@ namespace Sonn.Nameless_Knight
         private void Awake()
         {
             MakeSingleton();
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         private void Start()
         {
@@ -34,6 +35,23 @@ namespace Sonn.Nameless_Knight
             }
             return check;
         }
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (IsComponentNull())
+            {
+                return;
+            }
+
+            if (scene.buildIndex >= 2)
+            {
+                AudioManager.Ins.Play(AudioManager.Ins.musicSource, AudioManager.Ins.musicClips[2]);
+            }
+            else
+            {
+                AudioManager.Ins.Play(AudioManager.Ins.musicSource, AudioManager.Ins.musicClips[0]);
+            }
+        }
+
         private void AudioState()
         {
             if (IsComponentNull())
@@ -64,7 +82,7 @@ namespace Sonn.Nameless_Knight
             FadeTransition.Ins.FadeToScene(1);
             Time.timeScale = 1f;
             gameState = GameState.Playing;
-            AudioManager.Ins.Play(AudioManager.Ins.musicSource, AudioManager.Ins.musicClips[0]);
+        
         }
         public void PauseGame()
         {

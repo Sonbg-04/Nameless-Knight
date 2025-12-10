@@ -230,7 +230,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheckPoint: {fileID: 2408738755706393245}
   speedMovement: 5
-  speedShoot: 10
+  speedShoot: 7
   shootCooldown: 0.25
   groundCheckRadius: 0.2
   jumpForce: 10
@@ -247,4 +247,3 @@ MonoBehaviour:
   - {fileID: 297620435, guid: 243ade56b05943a4ba310571d110502b, type: 3}
   - {fileID: 638389580, guid: 243ade56b05943a4ba310571d110502b, type: 3}
   bloodBar: {fileID: 0}
-  enemyLists: []

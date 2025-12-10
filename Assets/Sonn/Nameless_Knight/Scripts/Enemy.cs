@@ -22,7 +22,6 @@ namespace Sonn.Nameless_Knight
             m_sR = GetComponent<SpriteRenderer>();
             m_anim = GetComponent<Animator>();
             m_currentHealth = health;
-            m_generatingTower = FindObjectOfType<GeneratingTower>();
         }
         private void Update()
         {
@@ -41,6 +40,10 @@ namespace Sonn.Nameless_Knight
                 Debug.LogError("Có component bị null ở " + this.name + "!");
             }
             return check;
+        }
+        public void SetTower(GeneratingTower tower)
+        {
+            m_generatingTower = tower;
         }
         private void EnemyMovement()
         {

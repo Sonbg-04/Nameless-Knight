@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Sonn/Nameless_Knight/Scenes/Gameplay_3.unity
     guid: 23c2251b22457834787be0c39b52b519
+  - enabled: 1
+    path: Assets/Sonn/Nameless_Knight/Scenes/Gameplay_final.unity
+    guid: 414b9a1697069784991f621462d1bd49
   m_configObjects: {}

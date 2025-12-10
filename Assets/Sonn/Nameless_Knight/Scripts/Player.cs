@@ -22,7 +22,6 @@ namespace Sonn.Nameless_Knight
 
         private GameObject m_treasureChest, m_spawnPlayer;
         private int m_currentHealth;
-        private Vector3 m_originalPos;
         private Animator m_anim;
         private SpriteRenderer m_sp;
         private Rigidbody2D m_rb;
@@ -39,7 +38,6 @@ namespace Sonn.Nameless_Knight
         private void Start()
         {
             m_currentHealth = playerHealth;
-            m_originalPos = transform.position;
         }
         private void OnEnable()
         {
@@ -75,15 +73,7 @@ namespace Sonn.Nameless_Knight
             {
                 return;
             }
-            var sceneIndex = SceneManager.GetActiveScene().buildIndex;
-            if (sceneIndex == 1)
-            {
-                transform.position = m_originalPos;
-            }
-            else if (sceneIndex >= 2 && m_spawnPlayer != null)
-            {
-                transform.position = m_spawnPlayer.transform.position;
-            }
+            transform.position = m_spawnPlayer.transform.position;
             GameManager.Ins.Score = 0;
         }    
         public void SetStateOnLoadScene()
@@ -104,7 +94,7 @@ namespace Sonn.Nameless_Knight
             {
                 return;
             }    
-            if (scene.buildIndex == 0)
+            if (scene.buildIndex <= 0)
             {
                 if (Ins == this)
                 {
@@ -113,7 +103,7 @@ namespace Sonn.Nameless_Knight
                 }
                 return;
             }
-            else if (scene.buildIndex >= 1)
+            else
             {
                 var blood = GameObject.Find("Blood_bar");
                 if (blood == null)
@@ -131,17 +121,14 @@ namespace Sonn.Nameless_Knight
                     bloodBar.sprite = bloodStates[m_currentHealth];
                 }
 
-                if (scene.buildIndex >= 2)
+                var spawnPoint = GameObject.Find("SpawnPlayer");
+                if (spawnPoint == null)
                 {
-                    var spawnPoint = GameObject.Find("SpawnPlayer");
-                    if (spawnPoint == null)
-                    {
-                        Debug.LogWarning("Không tìm thấy 'SpawnPlayer' ở scene " + scene.buildIndex);
-                        return;
-                    }
-                    m_spawnPlayer = spawnPoint;
-                    transform.position = spawnPoint.transform.position;
+                    Debug.LogWarning("Không tìm thấy 'SpawnPlayer' ở scene " + scene.buildIndex);
+                    return;
                 }
+                m_spawnPlayer = spawnPoint;
+                transform.position = spawnPoint.transform.position;
 
                 SearchForGameObject();
             }
@@ -214,7 +201,7 @@ namespace Sonn.Nameless_Knight
             {
                 return;
             }    
-            if (Input.GetKeyDown(KeyCode.UpArrow) && m_isGrounded)
+            if (Input.GetKeyDown(KeyCode.Space) && m_isGrounded)
             {
                 m_rb.velocity = new (m_rb.velocity.x, jumpForce);
             }    
@@ -222,7 +209,7 @@ namespace Sonn.Nameless_Knight
         private void PlayerShoot()
         {
             m_shootTimer += Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.T) && m_shootTimer >= shootCooldown)
+            if (Input.GetKeyDown(KeyCode.Return) && m_shootTimer >= shootCooldown)
             {
                 m_shootTimer = 0;
                 if (!m_isAttacking)
