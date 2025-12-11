@@ -134,7 +134,175 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Minotaur_boss_run_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 22
+        width: 52
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26d64402b8ea5b14d9a30fe792019366
+      internalID: 303258377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minotaur_boss_run_1
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 24
+        width: 52
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e115bd53a87176c4d8f66e86198aa421
+      internalID: 1653415884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minotaur_boss_run_2
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 22
+        width: 52
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54314c52211025848a3296c54d773497
+      internalID: 673268487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minotaur_boss_run_3
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 20
+        width: 52
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 627788f611ca5b440aa5cbbde23c3f0f
+      internalID: -198968807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minotaur_boss_run_4
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 22
+        width: 52
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c2b8e16f43568d47a213597bc2892eb
+      internalID: -1044680971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minotaur_boss_run_5
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 24
+        width: 52
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33430476f73d2454c8b5f233c7484d9b
+      internalID: -573307512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minotaur_boss_run_6
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 22
+        width: 52
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d94b294b81655dc4294729f07488aeba
+      internalID: 437632564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minotaur_boss_run_7
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 20
+        width: 52
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 674f1e1404463384eb7117da32b5a9a4
+      internalID: -2101289189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +313,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Minotaur_boss_run_0: 303258377
+      Minotaur_boss_run_1: 1653415884
+      Minotaur_boss_run_2: 673268487
+      Minotaur_boss_run_3: -198968807
+      Minotaur_boss_run_4: -1044680971
+      Minotaur_boss_run_5: -573307512
+      Minotaur_boss_run_6: 437632564
+      Minotaur_boss_run_7: -2101289189
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

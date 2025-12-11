@@ -230,12 +230,12 @@ MonoBehaviour:
     m_Bits: 64
   groundCheckPoint: {fileID: 2408738755706393245}
   speedMovement: 5
-  speedShoot: 7
+  speedShoot: 11
   shootCooldown: 0.25
   groundCheckRadius: 0.2
   jumpForce: 10
   playerHealth: 5
-  attackDamage: 20
+  attackDamage: 40
   arrowPrefab: {fileID: 672891686660673170, guid: 1cadc734a91188c4c842ec3ef94ab392, type: 3}
   treasureChestOpen: {fileID: -1162884691, guid: 562913f7639c05c4c94d3521010c66d5, type: 3}
   offsetArrowSpawn: {x: 1.108, y: -0.46, z: 0}

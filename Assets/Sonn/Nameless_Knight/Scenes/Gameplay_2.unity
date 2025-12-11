@@ -51470,7 +51470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1461180582}
   m_Layer: 0
-  m_Name: Item
+  m_Name: Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72287,12 +72287,10 @@ MonoBehaviour:
   start: 37
   end: 42
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 2982827904401732291}
+  isBeeEnemy: 0
+  isBoarEnemy: 0
 --- !u!61 &1382611199718156988
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -72566,12 +72564,10 @@ MonoBehaviour:
   start: 23
   end: 25
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 2370028938470033924}
+  isBeeEnemy: 0
+  isBoarEnemy: 0
 --- !u!1 &2075662711930529643
 GameObject:
   m_ObjectHideFlags: 0
@@ -72633,7 +72629,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 1120610210, guid: e299ce41c387f92499e07f1b370f59a2, type: 3}
+  m_Sprite: {fileID: -1373231997, guid: af5f1d3bf0b485946ba4540b1929a98e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -72685,7 +72681,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 1120610210, guid: e299ce41c387f92499e07f1b370f59a2, type: 3}
+  m_Sprite: {fileID: -1373231997, guid: af5f1d3bf0b485946ba4540b1929a98e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -72869,7 +72865,7 @@ Transform:
   m_GameObject: {fileID: 6407625308256522090}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72936,7 +72932,7 @@ Transform:
   m_GameObject: {fileID: 5867451077769901997}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73361,7 +73357,7 @@ Transform:
   m_GameObject: {fileID: 4387953848426038102}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73544,12 +73540,10 @@ MonoBehaviour:
   start: 38
   end: 40
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 8397511006703078888}
+  isBeeEnemy: 0
+  isBoarEnemy: 0
 --- !u!95 &5825172537147701714
 Animator:
   serializedVersion: 5
@@ -73662,12 +73656,10 @@ MonoBehaviour:
   start: 43.7
   end: 47
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 3321158186405550717}
+  isBeeEnemy: 0
+  isBoarEnemy: 1
 --- !u!114 &6012153624017551368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73683,12 +73675,10 @@ MonoBehaviour:
   start: 35
   end: 46
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 3321158186370735010}
+  isBeeEnemy: 0
+  isBoarEnemy: 1
 --- !u!114 &6029175365054574901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73704,12 +73694,10 @@ MonoBehaviour:
   start: 35
   end: 45
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 7547473702019251229}
+  isBeeEnemy: 0
+  isBoarEnemy: 0
 --- !u!1 &6094557381888708978
 GameObject:
   m_ObjectHideFlags: 0
@@ -73862,7 +73850,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 1858549948, guid: bf5736a2ae456304ebf9143ccafc936f, type: 3}
+  m_Sprite: {fileID: 256756427, guid: c1979d7b272599d459a2b2665392b1fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -74009,12 +73997,10 @@ MonoBehaviour:
   start: 20
   end: 28
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 6248752933830916168}
+  isBeeEnemy: 0
+  isBoarEnemy: 1
 --- !u!114 &7481828617045024162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74030,12 +74016,10 @@ MonoBehaviour:
   start: 22
   end: 28
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 6248752933437680318}
+  isBeeEnemy: 0
+  isBoarEnemy: 1
 --- !u!114 &7481828617141579611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74051,12 +74035,10 @@ MonoBehaviour:
   start: 56.7
   end: 59
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 6248752934280681543}
+  isBeeEnemy: 0
+  isBoarEnemy: 1
 --- !u!114 &7481828618271604260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74072,12 +74054,10 @@ MonoBehaviour:
   start: 20
   end: 25.5
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 6248752935430752568}
+  isBeeEnemy: 0
+  isBoarEnemy: 1
 --- !u!4 &7547473702019251229
 Transform:
   m_ObjectHideFlags: 0
@@ -74087,7 +74067,7 @@ Transform:
   m_GameObject: {fileID: 1204289450519853427}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74108,12 +74088,10 @@ MonoBehaviour:
   start: 56
   end: 59
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 5899983880701748732}
+  isBeeEnemy: 0
+  isBoarEnemy: 1
 --- !u!1 &8250808470230508135
 GameObject:
   m_ObjectHideFlags: 0
@@ -74171,7 +74149,7 @@ Transform:
   m_GameObject: {fileID: 901157819660732550}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74447,7 +74425,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: -2147268610, guid: f5ccb987f3b93454ea762cb68cd5dc24, type: 3}
+  m_Sprite: {fileID: 653392979, guid: eeeeb1bff5991c54db61f4224b35f357, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -74499,7 +74477,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: -2147268610, guid: f5ccb987f3b93454ea762cb68cd5dc24, type: 3}
+  m_Sprite: {fileID: 653392979, guid: eeeeb1bff5991c54db61f4224b35f357, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -74551,7 +74529,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: -2147268610, guid: f5ccb987f3b93454ea762cb68cd5dc24, type: 3}
+  m_Sprite: {fileID: 653392979, guid: eeeeb1bff5991c54db61f4224b35f357, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -74603,7 +74581,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: -2147268610, guid: f5ccb987f3b93454ea762cb68cd5dc24, type: 3}
+  m_Sprite: {fileID: 653392979, guid: eeeeb1bff5991c54db61f4224b35f357, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -74629,12 +74607,10 @@ MonoBehaviour:
   start: 43
   end: 49
   speedMovement: 1
-  groundCheckDistance: 0.2
   health: 36
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckPoint: {fileID: 4966724100618176056}
+  isBeeEnemy: 0
+  isBoarEnemy: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

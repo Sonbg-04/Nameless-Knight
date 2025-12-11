@@ -5,46 +5,46 @@ using UnityEngine;
 public class BossAI : MonoBehaviour
 {
     [Header("Phát hiện Player")]
-    [SerializeField] private Transform player;
-    [SerializeField] private float phamViPhatHienNgang = 40f; // Phạm vi phát hiện theo chiều ngang (X)
-    [SerializeField] private float phamViPhatHienDoc = 2f; // Phạm vi phát hiện theo chiều dọc (Y)
-    [SerializeField] private float khoangCachTanCong = 2f; // Khoảng cách để bắt đầu tấn công
-    [SerializeField] private float khoangCachDungSkill = 5f; // Khoảng cách để bắt đầu dùng skill
+     private Transform player;
+     private float phamViPhatHienNgang = 40f; // Phạm vi phát hiện theo chiều ngang (X)
+     private float phamViPhatHienDoc = 2f; // Phạm vi phát hiện theo chiều dọc (Y)
+     private float khoangCachTanCong = 2f; // Khoảng cách để bắt đầu tấn công
+     private float khoangCachDungSkill = 5f; // Khoảng cách để bắt đầu dùng skill
 
     [Header("Di chuyển")]
-    [SerializeField] private float tocDoChay = 6f; // Tốc độ chạy về phía player
+     private float tocDoChay = 6f; // Tốc độ chạy về phía m_playerTransform
 
     [Header("Tấn công")]
-    [SerializeField] private float thoiGianChoiTanCong = 1.5f; // Thời gian chờ giữa các lần tấn công
-    [SerializeField] private int soLanTanCongTruocSkill = 3; // Số lần tấn công trước khi dùng skill
+     private float thoiGianChoiTanCong = 1.5f; // Thời gian chờ giữa các lần tấn công
+     private int soLanTanCongTruocSkill = 3; // Số lần tấn công trước khi dùng skill
 
     [Header("Skill")]
-    [SerializeField] private float tocDoLaoSkill = 15f; // Tốc độ lao khi dùng skill
-    [SerializeField] private float khoangCachLaoSkill = 10f; // Khoảng cách lao khi dùng skill
+     private float tocDoLaoSkill = 15f; // Tốc độ lao khi dùng skill
+     private float khoangCachLaoSkill = 10f; // Khoảng cách lao khi dùng skill
 
     [Header("Collider other")]
-    [SerializeField] private BoxCollider2D colliderOther; // Collider khác (như phát hiện chân đất, tường, v.v.)
+     private BoxCollider2D colliderOther; // Collider khác (như phát hiện chân đất, tường, v.v.)
 
     [Header("Collider Attack 1")]
-    [SerializeField] private BoxCollider2D colliderAttack1; // Collider để gây sát thương
-    [SerializeField] private Vector2 offsetAttack1Phai; // Offset khi hướng phải
-    [SerializeField] private Vector2 offsetAttack1Trai; // Offset khi hướng trái
+     private BoxCollider2D colliderAttack1; // Collider để gây sát thương
+     private Vector2 offsetAttack1Phai; // Offset khi hướng phải
+     private Vector2 offsetAttack1Trai; // Offset khi hướng trái
 
     [Header("Collider Attack 2")]
-    [SerializeField] private BoxCollider2D colliderAttack2; // Collider để gây sát thương
-    [SerializeField] private Vector2 offsetAttack2Phai; // Offset khi hướng phải
-    [SerializeField] private Vector2 offsetAttack2Trai; // Offset khi hướng trái
+     private BoxCollider2D colliderAttack2; // Collider để gây sát thương
+     private Vector2 offsetAttack2Phai; // Offset khi hướng phải
+     private Vector2 offsetAttack2Trai; // Offset khi hướng trái
 
     [Header("Collider Skill")]
-    [SerializeField] private BoxCollider2D colliderSkill; // Collider để gây sát thương
-    [SerializeField] private Vector2 offsetSkillPhai; // Offset khi hướng phải
-    [SerializeField] private Vector2 offsetSkillTrai; // Offset khi hướng trái
+     private BoxCollider2D colliderSkill; // Collider để gây sát thương
+     private Vector2 offsetSkillPhai; // Offset khi hướng phải
+     private Vector2 offsetSkillTrai; // Offset khi hướng trái
 
     // Trạng thái
     private enum TrangThai
     {
         DungYen,    // Đứng yên
-        TruyDuoi,   // Chạy đến player
+        TruyDuoi,   // Chạy đến m_playerTransform
         TanCong,    // Đang tấn công
         Skill       // Đang dùng skill
     }
@@ -67,10 +67,10 @@ public class BossAI : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Tự động tìm player nếu chưa gán
+        // Tự động tìm m_playerTransform nếu chưa gán
         if (player == null)
         {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("player");
+            GameObject playerObj = GameObject.FindGameObjectWithTag("m_playerTransform");
             if (playerObj != null)
             {
                 player = playerObj.transform;
@@ -146,7 +146,7 @@ public class BossAI : MonoBehaviour
         float khoangCachDoc = Mathf.Abs(player.position.y - transform.position.y);
         bool trongVungPhatHien = khoangCachNgang <= phamViPhatHienNgang && khoangCachDoc <= phamViPhatHienDoc;
 
-        // Phát hiện player trong phạm vi
+        // Phát hiện m_playerTransform trong phạm vi
         if (trongVungPhatHien)
         {
             trangThaiHienTai = TrangThai.TruyDuoi;
@@ -161,7 +161,7 @@ public class BossAI : MonoBehaviour
         bool trongVungPhatHien = khoangCachNgang <= phamViPhatHienNgang && khoangCachDoc <= phamViPhatHienDoc;
         float khoangCach = Vector2.Distance(transform.position, player.position);
 
-        // Nếu player ra khỏi phạm vi phát hiện hình chữ nhật
+        // Nếu m_playerTransform ra khỏi phạm vi phát hiện hình chữ nhật
         if (!trongVungPhatHien)
         {
             trangThaiHienTai = TrangThai.DungYen;
@@ -177,7 +177,7 @@ public class BossAI : MonoBehaviour
                 BatDauSkill();
             }
         }
-        // Nếu đến gần player đủ để tấn công
+        // Nếu đến gần m_playerTransform đủ để tấn công
         else if (khoangCach <= khoangCachTanCong)
         {
             // Kiểm tra cooldown tấn công
@@ -188,7 +188,7 @@ public class BossAI : MonoBehaviour
         }
         else
         {
-            // Di chuyển về phía player
+            // Di chuyển về phía m_playerTransform
             float huongX = Mathf.Sign(player.position.x - transform.position.x);
             transform.Translate(huongX * tocDoChay * Time.deltaTime, 0, 0);
 
@@ -235,7 +235,7 @@ public class BossAI : MonoBehaviour
         viTriBatDauLaoSkill = transform.position;
         huongLaoSkill = player.position.x > transform.position.x ? 1f : -1f;
 
-        // Lật sprite theo hướng player
+        // Lật sprite theo hướng m_playerTransform
         spriteRenderer.flipX = huongLaoSkill < 0;
 
         animator.SetTrigger("Skill");
@@ -247,7 +247,7 @@ public class BossAI : MonoBehaviour
 
         if (!choPhepLaoSkill) return;
 
-        // Lao về phía player
+        // Lao về phía m_playerTransform
         float khoangCachDaLao = Mathf.Abs(transform.position.x - viTriBatDauLaoSkill.x);
 
         if (khoangCachDaLao < khoangCachLaoSkill)
@@ -346,7 +346,7 @@ public class BossAI : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, khoangCachTanCong);
 
-        // Vẽ đường đến player khi đang truy đuổi
+        // Vẽ đường đến m_playerTransform khi đang truy đuổi
         if (Application.isPlaying && player != null && trangThaiHienTai == TrangThai.TruyDuoi)
         {
             Gizmos.color = Color.cyan;

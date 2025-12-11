@@ -26,7 +26,8 @@ namespace Sonn.Nameless_Knight
         private SpriteRenderer m_sp;
         private Rigidbody2D m_rb;
         private float m_shootTimer = 0;
-        private bool m_isAttacking = false, m_isGrounded = false;
+        private bool m_isAttacking = false, m_isGrounded = false, m_isInvincible = false;
+        public bool IsInvincible { get => m_isInvincible; }
 
         private void Awake()
         {
@@ -200,16 +201,17 @@ namespace Sonn.Nameless_Knight
             if (IsComponentNull())
             {
                 return;
-            }    
-            if (Input.GetKeyDown(KeyCode.Space) && m_isGrounded)
+            }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow) && m_isGrounded)
             {
-                m_rb.velocity = new (m_rb.velocity.x, jumpForce);
-            }    
+                m_rb.velocity = new(m_rb.velocity.x, jumpForce);
+            }
         }
         private void PlayerShoot()
         {
             m_shootTimer += Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.Return) && m_shootTimer >= shootCooldown)
+            if (Input.GetKeyDown(KeyCode.T) && m_shootTimer >= shootCooldown)
             {
                 m_shootTimer = 0;
                 if (!m_isAttacking)
@@ -270,6 +272,10 @@ namespace Sonn.Nameless_Knight
 
             if (collision.gameObject.CompareTag(Const.ENEMY_TAG))
             {
+                if (m_isInvincible)
+                {
+                    return;
+                }
                 m_currentHealth--;
                 Debug.Log("Player Health: " + m_currentHealth);
                 StartCoroutine(HitEffect());
@@ -309,11 +315,20 @@ namespace Sonn.Nameless_Knight
             }    
             if (collision.gameObject.CompareTag(Const.DEAD_TAG))
             {
+                if (m_isInvincible)
+                {
+                    return;
+                }
                 m_currentHealth = 0;
                 GameManager.Ins.GameOver();
                 GameManager.Ins.isPlayerDead = true;
                 GUIManager.Ins.ActiveLosegameGUI();
             }    
+        }
+        public void SetInvincible(bool enable)
+        {
+            m_isInvincible = enable;
+            Debug.Log($"Player invincibility set to {enable}");
         }
     }
 }
