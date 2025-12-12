@@ -16,7 +16,14 @@ namespace Sonn.Nameless_Knight
                 {
                     enemy.TakeDamage(damage);
                 }
-                
+            }
+            if (collision.gameObject.CompareTag(Const.BOSS_TAG))
+            {
+                var boss = collision.gameObject.GetComponent<BossAI>();
+                if (boss != null)
+                {
+                    boss.TakeDamage(damage);
+                }
             }
         }
     }

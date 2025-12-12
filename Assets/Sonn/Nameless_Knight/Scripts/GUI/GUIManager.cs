@@ -81,7 +81,7 @@ namespace Sonn.Nameless_Knight
             }
             return check;
         }
-        private void UpdateIcon(int sceneId)
+        public void UpdateIcon(int sceneId)
         {
             if (iconImgs.Count == 0)
             {
@@ -101,6 +101,14 @@ namespace Sonn.Nameless_Knight
             {
                 currentImg.sprite = iconImgs[1];
                 btnNextlv.image.sprite = iconImgs[4];
+            }
+            else if (sceneId == 4)
+            {
+                menuEndgame.sprite = iconImgs[5];
+                titleWingame.gameObject.SetActive(false);
+                btnNextlv.gameObject.SetActive(false);
+                countTxt.gameObject.SetActive(false);
+                currentImg.gameObject.SetActive(false);
             }    
         }    
         private void NonActiveObject()
@@ -130,6 +138,7 @@ namespace Sonn.Nameless_Knight
             btnReplay.gameObject.SetActive(true);
             btnBack.gameObject.SetActive(true);
             btnPause.gameObject.SetActive(false);
+            
         }
         public void ActiveLosegameGUI()
         {

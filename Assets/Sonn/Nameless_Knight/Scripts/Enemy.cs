@@ -26,7 +26,7 @@ namespace Sonn.Nameless_Knight
                         m_startPosition, m_attackTargetPos;
         private float m_areaWidth = 5f, m_areaHeight = 3f,
                       m_stopDistance = 0.3f, m_detectRange = 8f, m_chaseSpeed = 4f,
-                      m_attackStopDistance = 0.3f, m_verticalRise = 4f, m_attackTriggerDistance = 7f,
+                      m_attackStopDistance = 0.3f, m_verticalRise = 3f, m_attackTriggerDistance = 7f,
                       m_attackDiveSpeed = 12f, m_attackCooldown = 2f, m_lastAttackTime = -999f;
         private bool m_isChasing = false, m_isAttacking = false, 
                      m_hasReachedVertical = false, m_hasReachedHorizontal = false;

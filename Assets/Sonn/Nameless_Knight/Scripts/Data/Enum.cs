@@ -13,4 +13,11 @@ namespace Sonn.Nameless_Knight
         GameWin,
         GameOver
     }
+    public enum TrangThai
+    {
+        DungYen,
+        TruyDuoi,
+        TanCong,
+        Skill
+    }
 }

@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 3678441219132711332}
   - component: {fileID: 635696136434579199}
   - component: {fileID: 5552918040507000781}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Knight
   m_Icon: {fileID: 0}
@@ -229,11 +229,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheckPoint: {fileID: 2408738755706393245}
-  speedMovement: 5
+  speedMovement: 7
   speedShoot: 11
   shootCooldown: 0.25
   groundCheckRadius: 0.2
-  jumpForce: 10
+  jumpForce: 11
   playerHealth: 5
   attackDamage: 40
   arrowPrefab: {fileID: 672891686660673170, guid: 1cadc734a91188c4c842ec3ef94ab392, type: 3}

@@ -250,7 +250,7 @@ namespace Sonn.Nameless_Knight
             m_isAttacking = true;
             m_anim.SetBool("Attacking", true);
             var animLength = m_anim.GetCurrentAnimatorStateInfo(0).length;
-            var spawnTime = (11f / 12f) * animLength;
+            var spawnTime = (20f / 15f) * animLength;
             yield return new WaitForSeconds(spawnTime);
             ShootArrow();
             yield return new WaitForSeconds(animLength - spawnTime);
@@ -272,20 +272,7 @@ namespace Sonn.Nameless_Knight
 
             if (collision.gameObject.CompareTag(Const.ENEMY_TAG))
             {
-                if (m_isInvincible)
-                {
-                    return;
-                }
-                m_currentHealth--;
-                Debug.Log("Player Health: " + m_currentHealth);
-                StartCoroutine(HitEffect());
-                AudioManager.Ins.Play(AudioManager.Ins.sfxSource, AudioManager.Ins.sfxClips[3]);
-                if (m_currentHealth <= 0)
-                {
-                    GameManager.Ins.GameOver();
-                    GameManager.Ins.isPlayerDead = true;
-                    GUIManager.Ins.ActiveLosegameGUI();   
-                }    
+                EnemyLogic();
             }
 
             if (collision.gameObject.CompareTag(Const.VICTORY_TAG))
@@ -294,8 +281,35 @@ namespace Sonn.Nameless_Knight
                 sp.sprite = treasureChestOpen;
                 GameManager.Ins.GameWin();
                 GUIManager.Ins.ActiveWingameGUI();
-            }    
-
+                if (SceneManager.GetActiveScene().buildIndex == 4)
+                {
+                    GUIManager.Ins.UpdateIcon(4);
+                }    
+            }
+        }
+        private void EnemyLogic()
+        {
+            if (m_isInvincible)
+            {
+                return;
+            }
+            m_currentHealth--;
+            Debug.Log("Player Health: " + m_currentHealth);
+            StartCoroutine(HitEffect());
+            AudioManager.Ins.Play(AudioManager.Ins.sfxSource, AudioManager.Ins.sfxClips[3]);
+            if (m_currentHealth <= 0)
+            {
+                GameManager.Ins.GameOver();
+                GameManager.Ins.isPlayerDead = true;
+                GUIManager.Ins.ActiveLosegameGUI();
+            }
+        }    
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (IsComponentNull())
+            {
+                return;
+            }
             if (collision.gameObject.CompareTag(Const.HEART_TAG))
             {
                 if (m_currentHealth < playerHealth)
@@ -304,14 +318,11 @@ namespace Sonn.Nameless_Knight
                     Debug.Log("Player Health: " + m_currentHealth);
                     AudioManager.Ins.Play(AudioManager.Ins.sfxSource, AudioManager.Ins.sfxClips[6]);
                     Destroy(collision.gameObject);
-                }    
+                }
             }
-        }
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (IsComponentNull())
+            if (collision.gameObject.CompareTag(Const.BOSS_TAG))
             {
-                return;
+                EnemyLogic();
             }    
             if (collision.gameObject.CompareTag(Const.DEAD_TAG))
             {
