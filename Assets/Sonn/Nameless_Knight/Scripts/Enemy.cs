@@ -9,30 +9,24 @@ namespace Sonn.Nameless_Knight
         public float start, end, speedMovement;
         public int health;
         public Transform groundCheckPoint;
-        
+        public bool isBeeEnemy, isBoarEnemy;
+
         private float m_groundCheckDistance = 0.2f;
         private GeneratingTower m_generatingTower;
         private Animator m_anim;
         private SpriteRenderer m_sR;
         private int m_currentHealth;
         private bool m_isMovingRight = true;
-
-        // Nguyễn Tài Nhất
-        // Bee System
-        public bool isBeeEnemy, isBoarEnemy;
-
         private Transform m_playerTransform;
         private Vector2 m_areaCenter = Vector2.zero, m_randomTargetPos, 
                         m_startPosition, m_attackTargetPos;
         private float m_areaWidth = 5f, m_areaHeight = 3f,
                       m_stopDistance = 0.3f, m_detectRange = 8f, m_chaseSpeed = 4f,
                       m_attackStopDistance = 0.3f, m_verticalRise = 3f, m_attackTriggerDistance = 7f,
-                      m_attackDiveSpeed = 12f, m_attackCooldown = 2f, m_lastAttackTime = -999f;
+                      m_attackDiveSpeed = 12f, m_attackCooldown = 2f, m_lastAttackTime = -999f,
+                      m_horizontalDetectionRange = 5f, m_verticalDetectionRange = 0.5f;
         private bool m_isChasing = false, m_isAttacking = false, 
                      m_hasReachedVertical = false, m_hasReachedHorizontal = false;
-
-        // Boar horizontal chasing player system
-        private float m_horizontalDetectionRange = 5f, m_verticalDetectionRange = 0.5f;
 
         private void Awake()
         {
@@ -77,7 +71,6 @@ namespace Sonn.Nameless_Knight
             return check;
         }
 
-        // Nguyễn Tài Nhất
         private void BeeInit()
         {
             if (isBeeEnemy)

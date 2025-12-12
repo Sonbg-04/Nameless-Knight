@@ -272,7 +272,7 @@ namespace Sonn.Nameless_Knight
 
             if (collision.gameObject.CompareTag(Const.ENEMY_TAG))
             {
-                EnemyLogic();
+                PlayerLogic();
             }
 
             if (collision.gameObject.CompareTag(Const.VICTORY_TAG))
@@ -280,14 +280,17 @@ namespace Sonn.Nameless_Knight
                 var sp = m_treasureChest.GetComponent<SpriteRenderer>();
                 sp.sprite = treasureChestOpen;
                 GameManager.Ins.GameWin();
-                GUIManager.Ins.ActiveWingameGUI();
                 if (SceneManager.GetActiveScene().buildIndex == 4)
                 {
-                    GUIManager.Ins.UpdateIcon(4);
-                }    
+                    GUIManager.Ins.ActiveFinalGameGUI();
+                }
+                else
+                {
+                    GUIManager.Ins.ActiveWingameGUI();
+                }
             }
         }
-        private void EnemyLogic()
+        private void PlayerLogic()
         {
             if (m_isInvincible)
             {
@@ -322,7 +325,7 @@ namespace Sonn.Nameless_Knight
             }
             if (collision.gameObject.CompareTag(Const.BOSS_TAG))
             {
-                EnemyLogic();
+                PlayerLogic();
             }    
             if (collision.gameObject.CompareTag(Const.DEAD_TAG))
             {
